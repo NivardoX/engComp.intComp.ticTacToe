@@ -23,7 +23,7 @@ def timing(f):
 class Board(list):
     def format_board(self):
         def get_symbol(f):
-            value = '__'
+            value = '.'
             if f == 1:
                 value = 'X'
             elif f == 0:
