@@ -1,24 +1,9 @@
 import functools
-import timeit
 from copy import deepcopy
 
 import math
-from functools import wraps
 
 inf = float(math.inf)
-
-
-def timing(f):
-    @wraps(f)
-    def wrap(*args, **kw):
-        start = timeit.default_timer()
-        result = f(*args, **kw)
-        end = timeit.default_timer()
-        print(f'{f.__name__} took: %2.4f sec' % (end - start))
-        return result
-
-    return wrap
-
 
 class Board(list):
     def format_board(self):
@@ -149,14 +134,13 @@ class TicTacToe:
         self.board = Board([[None] * board_size for _ in range(board_size)])
         print(self.board)
 
-    @timing
     def move(self, *args, **kwargs):
         return self.minimax(*args, **kwargs)
 
     @staticmethod
     def read_movement(board):
         while True:
-            k = eval(input("Enter your move (1...9): "))
+            k = eval(input("Enter your move (1-9): "))
             k -= 1
             x, y = int(k / 3), k % 3
             if 0 <= k <= 8 and board[x][y] is None:
